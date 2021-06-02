@@ -23,7 +23,7 @@ ui <- fluidPage(
     mainPanel(
 
       # Output: Histogram ----
-      plotOutput(outputId = "distPlot")
+      highcharter::highchartOutput(outputId = "distPlot")
 
     )
   )
