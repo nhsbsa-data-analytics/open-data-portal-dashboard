@@ -2,10 +2,7 @@
 header <- shinydashboard::dashboardHeader(
   
   # Use logo in the title
-  title = tags$img(src = "logo.png"), #"Open Data Portal Dashboard"
-
-  tags$li(class = "dropdown",
-          tags$a(HTML(paste("Refreshed at: ", "0"))))
+  title = tags$img(src = "logo.png") #"Open Data Portal Dashboard"
   
 )
 
@@ -22,8 +19,8 @@ sidebar <- shinydashboard::dashboardSidebar(
       tabName = "introduction"
     ),
     shinydashboard::menuItem(
-      text = "Region", 
-      tabName = "region"
+      text = "Items", 
+      tabName = "items"
     )
   )
 )
@@ -40,7 +37,7 @@ body <- shinydashboard::dashboardBody(
   shiny::titlePanel(
     shiny::h1(
       id = "title-panel", 
-      "Open Data Portal Dashboard"
+      "Open Data Portal Dashboard (Items & NIC)"
     )
   ),
   
@@ -49,7 +46,7 @@ body <- shinydashboard::dashboardBody(
     
     # Include the markdown for introduction tab
     introduction_ui(),
-    region_ui()
+    items_ui()
   )
 )
 
@@ -57,6 +54,5 @@ body <- shinydashboard::dashboardBody(
 ui <- shinydashboard::dashboardPage(
   header,
   sidebar,
-  body#,
-  #styling
+  body
 )
