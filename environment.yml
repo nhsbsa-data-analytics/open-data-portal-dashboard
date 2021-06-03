@@ -4,10 +4,12 @@ channels:
 dependencies:
   - r-base==3.6.0
   - rstudio==1.1.456
+  - r-magrittr==2.0.1
   - r-shiny==1.6.0
   - r-shinydashboard==0.7.1
   - r-jsonlite==1.7.2
   - r-crul==1.1.0
   - r-data.table==1.14.0
   - r-dplyr==1.0.6
+  - r-zoo==1.8_9
   - r-highcharter==0.8.2

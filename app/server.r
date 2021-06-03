@@ -1,25 +1,14 @@
-# Define server logic required to draw a histogram ----
 server <- function(input, output) {
-
-  # Histogram of the Old Faithful Geyser Data ----
-  # with requested number of bins
-  # This expression that generates a histogram is wrapped in a call
-  # to renderPlot to indicate that:
-  #
-  # 1. It is "reactive" and therefore should be automatically
-  #    re-executed when inputs (input$bins) change
-  # 2. Its output type is a plot
-  output$distPlot <- highcharter::renderHighchart({
-
-    x    <- faithful$waiting
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-    plt <- hist(x, breaks = bins, col = "#75AADB", border = "white",
-         xlab = "Waiting time to next eruption (in mins)",
-         main = "Histogram of waiting times")
-    
-    highcharter::hchart(plt)
-
-    })
-
+  
+  # Find what resources are available
+  resouce_response <- jsonlite::fromJSON(
+    txt = paste0(base_endpoint, access_package_show_id, dataset_id)
+  )
+  
+  # Extract the resources
+  resource_id_list <- resouce_response$result$resources$name
+  
+  #introduction_server()
+  region_server()
+  
 }
