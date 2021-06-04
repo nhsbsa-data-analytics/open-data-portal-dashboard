@@ -1,158 +1,58 @@
-# UI ---------------------------------------------------------------------------
-header = dashboardHeader(
-  title = "ODP - Items & NIC"
+# Define the header (on every page)
+header <- shinydashboard::dashboardHeader(
+  
+  # Use logo in the title
+  title = tags$img(src = "logo.png") #"Open Data Portal Dashboard"
+  
 )
 
-# Define the sidebar (on every page) -------------------------------------------
-sidebar = dashboardSidebar(
-  width = 200,
-  sidebarMenu(
-    # Static Sidebar
-    #style = "position: fixed; overflow: visible;",
+# Define the sidebar (on every page)
+sidebar <- shinydashboard::dashboardSidebar(
+  
+  shinydashboard::sidebarMenu(
+    
+    id = "side_bar",
     
     # Tab List
-    menuItem(
-      text = strong("Introduction"),
+    shinydashboard::menuItem(
+      text = "Introduction", 
       tabName = "introduction"
     ),
-    menuItem(
-      text = strong("Items"),
-      tabName = "items_tab"
-    ),
-    menuItem(
-      text = strong("NIC"),
-      tabName = "nic_tab"
+    shinydashboard::menuItem(
+      text = "Items", 
+      tabName = "items"
     )
   )
 )
 
-
-# Define the main body of the dashboard ----------------------------------------
-body = dashboardBody(
+# Define the main body of the dashboard
+body <- shinydashboard::dashboardBody(
   
-  # Main theme
-  shinyDashboardThemes(
-    theme = "grey_light"
+  # Load in styling file
+  tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
+  ),
+  
+  # Display the security classification at the top of each page
+  shiny::titlePanel(
+    shiny::h1(
+      id = "title-panel", 
+      "Open Data Portal Dashboard (Items & NIC)"
+    )
   ),
   
   # Iterate over each tab and fill
-  tabItems(
+  shinydashboard::tabItems(
     
-    # Tab Two ------------------------------------------------------------------
-    tabItem(
-      "items_tab",
-      fluidRow(
-        tabBox(
-          width = 12,
-          side = "left",
-          id = "items_tab_panel",
-          selected = "Region",
-          
-          # TabPanel One -------------------------------------------------------
-          tabPanel(
-            title = "Region",
-            fluidRow(
-              column(
-                width = 8,
-                box(
-                  width = 12,
-                  solidHeader = T,
-                  title = "Regions Items Table",
-                  reactableOutput("items_region_table", height = "300px")
-                ),
-                box(
-                  width = 12,
-                  solidHeader = T,
-                  title = "Regions Items Line",
-                  highchartOutput("items_region_line", height = "300px")
-                )
-              ),
-              column(
-                width = 4,
-                box(
-                  width = 12,
-                  solidHeader = T,
-                  title = "Regions Items Map",
-                  highchartOutput("items_region_map", height = "600px")
-                )
-              )
-            )
-          ),
-          
-          # TabPanelTwo --------------------------------------------------------
-          tabPanel(
-            title = "STP",
-            fluidRow(
-              column(
-                width = 8,
-                box(
-                  width = 12,
-                  solidHeader = T,
-                  title = "STP Items Table",
-                  reactableOutput("items_stp_table", height = "300px")
-                ),
-                box(
-                  width = 12,
-                  solidHeader = T,
-                  title = "STP Items Line",
-                  highchartOutput("items_stp_line", height = "300px")
-                )
-              ),
-              column(
-                width = 4,
-                box(
-                  width = 12,
-                  solidHeader = T,
-                  title = "STP Items Map",
-                  highchartOutput("items_stp_map", height = "600px")
-                )
-              )
-            )
-          ),
-          
-          # TabPanel Three -----------------------------------------------------
-          tabPanel(
-            title = "CCG",
-            fluidRow(
-              column(
-                width = 8,
-                box(
-                  width = 12,
-                  solidHeader = T,
-                  title = "CCG Items Table",
-                  reactableOutput("items_ccg_table", height = "300px")
-                ),
-                box(
-                  width = 12,
-                  solidHeader = T,
-                  title = "CCG Items Line",
-                  highchartOutput("items_ccg_line", height = "300px")
-                )
-              ),
-              column(
-                width = 4,
-                box(
-                  width = 12,
-                  solidHeader = T,
-                  title = "CCG Items Map",
-                  highchartOutput("items_ccg_map", height = "600px")
-                )
-              )
-            )
-          )
-
-          #---------------------------------------------------------------------
-        )
-      )
-    )
+    # Include the markdown for introduction tab
+    introduction_ui(),
+    items_ui()
   )
 )
-          
-# Define the UI ----------------------------------------------------------------
-ui = dashboardPage(
-  header, 
-  sidebar, 
+
+# Define the UI
+ui <- shinydashboard::dashboardPage(
+  header,
+  sidebar,
   body
 )
-
-#-------------------------------------------------------------------------------
