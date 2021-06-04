@@ -13,3 +13,6 @@ dependencies:
   - r-dplyr==1.0.6
   - r-zoo==1.8_9
   - r-highcharter==0.8.2
+  - r-reactable==0.2.3
+  - r-geojsonsf==2.0.1
+  - r-sf==0.9-8
