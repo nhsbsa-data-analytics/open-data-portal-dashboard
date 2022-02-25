@@ -2,7 +2,7 @@
 header <- shinydashboard::dashboardHeader(
   
   # Use logo in the title
-  title = tags$img(src = "logo.png") #"Open Data Portal Dashboard"
+  title = tags$img(src = "logo.png")
   
 )
 
@@ -14,14 +14,9 @@ sidebar <- shinydashboard::dashboardSidebar(
     id = "side_bar",
     
     # Tab List
-    shinydashboard::menuItem(
-      text = "Introduction", 
-      tabName = "introduction"
-    ),
-    shinydashboard::menuItem(
-      text = "Items", 
-      tabName = "items"
-    )
+    shinydashboard::menuItem(text = "Introduction", tabName = "introduction"),
+    shinydashboard::menuItem(text = "CCG", tabName = "ccg")
+    
   )
 )
 
@@ -35,10 +30,7 @@ body <- shinydashboard::dashboardBody(
   
   # Display the security classification at the top of each page
   shiny::titlePanel(
-    shiny::h1(
-      id = "title-panel", 
-      "Open Data Portal Dashboard (Items & NIC)"
-    )
+    shiny::h1(id = "title-panel", "Open Data Portal Dashboard (Items & NIC)")
   ),
   
   # Iterate over each tab and fill
@@ -46,13 +38,9 @@ body <- shinydashboard::dashboardBody(
     
     # Include the markdown for introduction tab
     introduction_ui(),
-    items_ui()
+    ccg_ui()
   )
 )
 
 # Define the UI
-ui <- shinydashboard::dashboardPage(
-  header,
-  sidebar,
-  body
-)
+ui <- shinydashboard::dashboardPage(header, sidebar, body)
